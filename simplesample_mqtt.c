@@ -18,10 +18,16 @@ static const char* connectionString = IOT_CONFIG_CONNECTION_STRING;
 BEGIN_NAMESPACE(WeatherStation);
 
 DECLARE_MODEL(ContosoAnemometer,
+WITH_DATA(float, ATemperature),
+WITH_DATA(float, Temperature),
+ WITH_DATA(ascii_char_ptr, Location),
+WITH_DATA(ascii_char_ptr, type),
 WITH_DATA(ascii_char_ptr, DeviceId),
 WITH_DATA(int, WindSpeed),
-WITH_DATA(float, Temperature),
 WITH_DATA(float, Humidity),
+WITH_DATA(bool, TemperatureAlert),
+WITH_DATA(float, Latitude),
+WITH_DATA(float, Longitude),
 WITH_ACTION(TurnFanOn),
 WITH_ACTION(TurnFanOff),
 WITH_ACTION(SetAirResistance, int, Position)
@@ -198,15 +204,21 @@ void simplesample_mqtt_run(int temperature)
                        float tempCelsius = (tempVolt * 100.0) + 20.0;
  
                         bool temAlert =  tempCelsius > 24;
+                        myWeather->Temperature = tempCelsius;
+   myWeather->ATemperature = tempCelsius;
+                        myWeather->TemperatureAlert = (tempCelsius > 20.0);
                         myWeather->DeviceId = "Termometro VPN";
                         myWeather->WindSpeed = analogRead(0) ;
-                        myWeather->Temperature = tempCelsius;
+                        myWeather-> Humidity =digitalRead(1);
+                        myWeather-> Longitude= 10.0;
+                             myWeather-> Location= "Field";
+                        myWeather-> Latitude= 10.0;
+                          myWeather-> type= "termometro";
                         
-                        myWeather->Humidity =digitalRead(1);
                         {
                             unsigned char* destination;
                             size_t destinationSize;
-                            if (SERIALIZE(&destination, &destinationSize, myWeather->DeviceId, myWeather->WindSpeed, myWeather->Temperature, myWeather->Humidity) != CODEFIRST_OK)
+                            if (SERIALIZE(&destination, &destinationSize,    myWeather-> Location,  myWeather->ATemperature , myWeather->DeviceId, myWeather->WindSpeed, myWeather->Temperature, myWeather->Humidity, myWeather->Latitude,myWeather->Longitude,    myWeather-> type) != CODEFIRST_OK)
                             {
                                 (void)printf("Failed to serialize\r\n");
                             }

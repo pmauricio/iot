@@ -7,15 +7,15 @@
 /**
  * WiFi setup
  */
-#define IOT_CONFIG_WIFI_SSID            "Mauro"
-#define IOT_CONFIG_WIFI_PASSWORD        "mauricio111"
+#define IOT_CONFIG_WIFI_SSID            "WeWork"
+#define IOT_CONFIG_WIFI_PASSWORD        "P@ssw0rd"
 
 /**
  * Find under Microsoft Azure IoT Suite -> DEVICES -> <your device> -> Device Details and Authentication Keys
  * String containing Hostname, Device Id & Device Key in the format:
  *  "HostName=<host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"    
  */
-#define IOT_CONFIG_CONNECTION_STRING    "HostName=vpntemperatura2e2f5.azure-devices.net;DeviceId=20c2d795-8f32-4347-89de-bd9354435a5f;SharedAccessKey=UpHTuu5Nh4/NcHFXxCuwug=="
+#define IOT_CONFIG_CONNECTION_STRING    "HostName=testeparaverb7140.azure-devices.net;DeviceId=termometro;SharedAccessKey=dJvUdHXu7HxzlIbfgLZ5ca5Bbro0m/KArhTse1Wjoqk="
 
 /** 
  * Choose the transport protocol
